@@ -1,7 +1,7 @@
 // Queries for authentication module
 
 const SELECTUserByUserName = `
-  SELECT userId, userName, password 
+  SELECT userId, userName, email, password 
   FROM user 
   WHERE userName = ? AND password = ? AND deletedAt IS NULL
 `;
