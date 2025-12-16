@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+
+
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .welcome-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .welcome-card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .user-info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 4px solid #667eea;
+            margin-top: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+
+        .info-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .info-value {
+            color: #333;
+        }
+
+        .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .edit-btn {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Dashboard</h1>
+        <nav>
+
+            <form method="GET" action="/logout" style="display: inline;">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="welcome-card">
+            <h2>Welcome back, <%= user.username %>!</h2>
+            <p>You are successfully logged in. Here is your account information:</p>
+
+            <div class="user-info">
+                <div class="info-row">
+                    <span class="info-label">User ID:</span>
+                    <span class="info-value">
+                        <%= user.userId %>
+                    </span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value">
+                        <%= user.username %>
+                    </span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Login Status:</span>
+                    <span class="info-value" style="color: green; font-weight: 600;">✓ Active</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Profile Photo:</span>
+                    <span class="info-value">
+                        <img src="/upload/<%= user.profilePath %>" alt="Profile Photo" class="profile-img">
+                    </span>
+                </div>
+
+                <div class="edit-btn">
+                    <a href="/signup" >Edit Profile</a>
+
+                      <a href="/upload/<%= user.profilePath %>" target="_blank">
+                        View Profile 
+                    </a>
+                </div>
+
+                 
+            </div>
+        </div>
+
+
+
+</body>
+
+</html>

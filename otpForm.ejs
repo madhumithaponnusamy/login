@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: lavender;
+            color: #333;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 330px;
+        }
+
+        .container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #4A90E2;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+    </style>
+</head>
+
+<body>
+   <form id="otpForm">
+        <div class="container">
+           <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
+            <button type="submit">Verify OTP</button>
+        </div>
+    </form>
+
+
+    <script>
+        alert("OTP has been sent to your email!");
+
+
+        document.getElementById("otpForm").addEventListener("submit", async (e) => {
+            e.preventDefault(); 
+
+            const otp = document.getElementById("otp").value.trim();
+
+            const res = await fetch("/api/authsystem/otpverify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ otp }),
+                credentials: "include"
+            });
+
+            const result = await res.json();
+
+            if (result.success && result.redirect) {
+                window.location.href = result.redirect; 
+            } else {
+                alert(result.error); 
+            }
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>
